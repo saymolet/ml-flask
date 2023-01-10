@@ -1,6 +1,6 @@
 # Movie list app
 
-![demo-gif](https://s9.gifyu.com/images/ml-flask-demo.gif)
+![demo-gif](https://github.com/saymolet/ml-flask/blob/main/img/ml-flask-demo.gif)
 
 
 ## Prerequisites
