@@ -1,9 +1,4 @@
 # Movie list app
-Simple movie app list application with edit, add, and delete functions.
-Built with Python using Flask, WTF-forms, and SQLAlchemy. Uses SQLite DB to
-store all the added movies. The list will automatically
-sort all the movies based on the rating you gave them,
-from lowest to highest.
 
 ![demo-gif](https://s9.gifyu.com/images/ml-flask-demo.gif)
 
