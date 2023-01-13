@@ -17,8 +17,8 @@ pipeline {
                     // install python3 and poetry separately on jenkins
                     sh "poetry version minor"
                     sh "chmod a+x script.sh"
-                    def name = sh "./script.sh 0"
-                    def version = sh "./script.sh 1"
+                    def name = sh(script: "./script.sh 0", returnStdout: true)
+                    def version = sh(script: "./script.sh 1", returnStdout: true)
 
                     env.IMAGE_NAME = "$name-$version-$BUILD_NUMBER"
                     sh "echo $IMAGE_NAME"
