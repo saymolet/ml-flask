@@ -76,6 +76,7 @@ Deploys the application on an EC2 instance with docker-compose.yaml file
 and commits the version bump back to the repository.
 
 CI/CD Demo:
+
 https://user-images.githubusercontent.com/101016860/212427776-a30eca10-a17d-4cfd-90ed-6f1430df1e99.mp4
 
 ## Reference
