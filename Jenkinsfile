@@ -31,12 +31,13 @@ pipeline {
             }
         }
 
-        stage ("Check version")
+        stage ("Check version") {
             steps {
                 script {
                 sh 'cat pyproject.toml'
                 }
             }
+        }
 
 //         stage("build and push docker image") {
 //             steps {
