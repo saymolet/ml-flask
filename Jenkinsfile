@@ -23,8 +23,8 @@ pipeline {
                     // TODO: install poetry
                     sh "poetry version minor"
 
-                    def version = sh "IFS=" " read -r -a array <<< `poetry version | sed -r 's/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g'`; echo ${array[1]}"
-                    def name = sh "IFS=" " read -r -a array <<< `poetry version | sed -r 's/\x1B\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g'`; echo ${array[0]}"
+                    def version = sh "IFS=' ' read -r -a array <<< `poetry version | sed -r 's/\\x1B\\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g'`; echo ${array[1]}"
+                    def name = sh "IFS=' ' read -r -a array <<< `poetry version | sed -r 's/\\x1B\\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g'`; echo ${array[0]}"
                     env.IMAGE_NAME = "$name-$version-$BUILD_NUMBER"
                     sh "echo $IMAGE_NAME"
                 }
