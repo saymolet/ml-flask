@@ -27,11 +27,16 @@ in commands with your own API Key. Example:
 export API_KEY=8eba9165bc57j105827ff2df47879265
 ```
 
-
-
 ### Run inside the docker container:
 * Docker
 * API Key (see above for instructions)
+
+### CI/CD Pipeline
+
+* <a href="https://www.jenkins.io/doc/book/installing/docker/">Docker-in-docker Jenkins</a>
+* AWS EC2 Instance
+* API Key
+* Fine-grained personal access token for GitHub
 
 ## Usage
 ### Local build

@@ -21,7 +21,7 @@ pipeline {
                     // pip install poetry
 
                     sh "poetry version minor"
-                    sh "chmod u+x script.sh"
+                    sh "chmod u+x ./scripts/find_name_version.sh"
                     def name = sh(script: "./scripts/find_name_version.sh 0", returnStdout: true).trim()
                     def version = sh(script: "./scripts/find_name_version.sh 1", returnStdout: true).trim()
 
@@ -69,7 +69,7 @@ pipeline {
                 script {
                     // first - credentials id in Jenkins, second - where to push. Repo url, omitting the https protocol
                     // use fine-grained token instead of a password to authenticate to github
-                    gitLoginRemote "github-credentials", "github.com/saymolet/ml-flask.git"
+                    gitLoginRemote "github-fine-token", "github.com/saymolet/ml-flask.git"
                     // email and username for jenkins. Displayed with commit
                     gitConfig "jenkins@example.com", "jenkins"
                     // branch where to push and message with commit
