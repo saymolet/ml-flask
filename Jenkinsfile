@@ -22,8 +22,8 @@ pipeline {
 
                     sh "poetry version minor"
                     sh "chmod u+x script.sh"
-                    def name = sh(script: "./script.sh 0", returnStdout: true).trim()
-                    def version = sh(script: "./script.sh 1", returnStdout: true).trim()
+                    def name = sh(script: "./find_name_version.sh 0", returnStdout: true).trim()
+                    def version = sh(script: "./find_name_version.sh 1", returnStdout: true).trim()
 
                     env.IMAGE_NAME = "$name-$version-$BUILD_NUMBER"
                     sh "echo $IMAGE_NAME"
@@ -46,16 +46,18 @@ pipeline {
             steps {
                 script {
                     echo "Deploying to EC2 instance"
-                    // install docker, docker-compose and do docker login beforehand
-                    // shell commands
+                    // install docker, docker-compose and do docker login beforehand on EC2
                     // passing newest image name to shell script
                     def shellCmd = "bash ./ec2_deploy.sh saymolet/my-repo:${IMAGE_NAME}"
+                    // ec2 IP will change from instance to instance
                     def ec2_instance = "ec2-user@3.71.91.7"
 
+                    // do first login manually to avoid any failed authentications
+                    // ssh agent plugin in Jenkins
                     sshagent(['ec2-server-key']) {
-                        // shell script
+                        // copy compose and script
                         sh "scp docker-compose.yaml ${ec2_instance}:/home/ec2-user"
-                        sh "scp server-commands.sh ${ec2_instance}:/home/ec2-user"
+                        sh "scp ec2_deploy.sh ${ec2_instance}:/home/ec2-user"
                         sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
                     }
                 }
@@ -66,6 +68,7 @@ pipeline {
             steps {
                 script {
                     // first - credentials id in Jenkins, second - where to push. Repo url, omitting the https protocol
+                    // use fine-grained token instead of a password to authenticate to github
                     gitLoginRemote "github-credentials", "github.com/saymolet/ml-flask.git"
                     // email and username for jenkins. Displayed with commit
                     gitConfig "jenkins@example.com", "jenkins"
