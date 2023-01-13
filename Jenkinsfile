@@ -16,9 +16,9 @@ pipeline {
                 script {
                     // install python3 and poetry separately on jenkins
                     sh "poetry version minor"
-
-                    def name = sh "IFS=' ' read -r -a array <<< `poetry version | sed -r 's/\\x1B\\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g'`; echo ${array[0]}"
-                    def version = sh "IFS=' ' read -r -a array <<< `poetry version | sed -r 's/\\x1B\\[([0-9]{1,3}(;[0-9]{1,2};?)?)?[mGK]//g'`; echo '${array[1]}'"
+                    sh "chmod a+x script.sh"
+                    def name = sh "./script.sh 0"
+                    def version = sh "./script.sh 1"
 
                     env.IMAGE_NAME = "$name-$version-$BUILD_NUMBER"
                     sh "echo $IMAGE_NAME"
