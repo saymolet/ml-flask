@@ -22,8 +22,8 @@ pipeline {
 
                     sh "poetry version minor"
                     sh "chmod u+x script.sh"
-                    def name = sh(script: "./find_name_version.sh 0", returnStdout: true).trim()
-                    def version = sh(script: "./find_name_version.sh 1", returnStdout: true).trim()
+                    def name = sh(script: "./scripts/find_name_version.sh 0", returnStdout: true).trim()
+                    def version = sh(script: "./scripts/find_name_version.sh 1", returnStdout: true).trim()
 
                     env.IMAGE_NAME = "$name-$version-$BUILD_NUMBER"
                     sh "echo $IMAGE_NAME"
@@ -57,7 +57,7 @@ pipeline {
                     sshagent(['ec2-server-key']) {
                         // copy compose and script
                         sh "scp docker-compose.yaml ${ec2_instance}:/home/ec2-user"
-                        sh "scp ec2_deploy.sh ${ec2_instance}:/home/ec2-user"
+                        sh "scp ./scripts/ec2_deploy.sh ${ec2_instance}:/home/ec2-user"
                         sh "ssh -o StrictHostKeyChecking=no ${ec2_instance} ${shellCmd}"
                     }
                 }
