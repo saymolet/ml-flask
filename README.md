@@ -12,7 +12,7 @@ from lowest to highest
 
 ## Prerequisites
 ### Local build:
-* Python 3.8 and up
+* Python 3.10 and up
 
 * Install all needed dependencies:
 ```commandline
@@ -30,13 +30,6 @@ export API_KEY=8eba9165bc57j105827ff2df47879265
 ### Run inside the docker container:
 * Docker
 * API Key (see above for instructions)
-
-### CI/CD Pipeline
-
-* <a href="https://www.jenkins.io/doc/book/installing/docker/">Docker-in-docker Jenkins</a>
-* AWS EC2 Instance
-* API Key
-* Fine-grained personal access token for GitHub
 
 ## Usage
 ### Local build
@@ -62,6 +55,28 @@ docker run -d -p 5000:5000 -e API_KEY={YOUR_API_KEY} -v dbvolume:/usr/app/instan
 ```
 You can access the application on `127.0.0.1:5000`
 
+## CI/CD Pipeline
+
+### Prerequisites
+* [Docker-in-docker Jenkins](https://www.jenkins.io/doc/book/installing/docker/)
+* AWS EC2 Instance
+* API Key exported on EC2 instance (write to .bashrc)
+* Fine-grained personal access token for GitHub
+* Python 3.10 with pip and poetry dependency manager inside Jenkins container
+* SSH Agent plugin for Jenkins
+* Credentials configured on Jenkins
+
+Jenkins file uses a [shared library](https://gitlab.com/saymolet/jenkins-shared-library.git) of my own.
+You can tweak or change any part of the Jenkins file as needed for your own needs.
+
+This pipeline automatically, on every commit, 
+increments the version of the app in the pyproject.toml file. 
+Builds and pushes a Docker image to a private docker hub repository.
+Deploys the application on an EC2 instance with docker-compose.yaml file
+and commits the version bump back to the repository.
+
+
+
 ## Reference
 
-CSS and the Idea for this project came from <a href="https://github.com/angelabauer">Angela Yu</a>
+CSS and the idea for this application came from [Angela Yu](https://github.com/angelabauer)
