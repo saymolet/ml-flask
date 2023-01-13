@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ml-flask-app"
-version = "0.3.0"
+version = "0.4.0"
 description = "A simple movie list application with add, edit and delete functionality"
 authors = ["Vladyslav Samoilenko <vladyslav.samoilenko@proton.me>"]
 license = "Unlicense"
