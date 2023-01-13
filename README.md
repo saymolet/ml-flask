@@ -75,7 +75,7 @@ Builds and pushes a Docker image to a private docker hub repository.
 Deploys the application on an EC2 instance with docker-compose.yaml file
 and commits the version bump back to the repository.
 
-
+https://user-images.githubusercontent.com/101016860/212427265-683e2fbb-f16b-42d7-8ad8-820d87099c0d.mp4
 
 ## Reference
 
