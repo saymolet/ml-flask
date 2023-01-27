@@ -17,7 +17,7 @@ for this project
 
 * Install all needed dependencies:
 ```commandline
-pip install -r requirements.txt
+$ pip install -r requirements.txt
 ```
 * API Key. Register at `https://www.themoviedb.org/`. 
 Go to `Profile --> Settings --> API` and in the `API Key (v3 auth)` 
@@ -25,7 +25,7 @@ section copy your own API key. It should look something like
 this "`8eba9165bc57j105827ff2df47879265`". Replace `{YOUR_API_KEY}`
 in commands with your own API Key. Example:
 ```commandline
-export API_KEY=8eba9165bc57j105827ff2df47879265
+$ export API_KEY=8eba9165bc57j105827ff2df47879265
 ```
 
 ### Run inside the docker container:
@@ -36,23 +36,23 @@ export API_KEY=8eba9165bc57j105827ff2df47879265
 ### Local build
 Export your own API Key as an environmental variable:
 ```commandline
-export API_KEY={YOUR_API_KEY}
+$ export API_KEY={YOUR_API_KEY}
 ```
 Run the application locally:
 ```commandline
-python -m flask run
+$ python -m flask run
 ```
 You can access the application on `127.0.0.1:5000`
 
 ### Run inside the docker container with named volumes
 Build the docker image:
 ```commandline
-docker build -t ml-app-flask .
+$ docker build -t ml-app-flask .
 ```
 
 Run the docker container
 ```commandline
-docker run -d -p 5000:5000 -e API_KEY={YOUR_API_KEY} -v dbvolume:/usr/app/instance ml-app-flask
+$ docker run -d -p 5000:5000 -e API_KEY={YOUR_API_KEY} -v dbvolume:/usr/app/instance ml-app-flask
 ```
 You can access the application on `127.0.0.1:5000`
 
